@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  get "sessions/new", as: "login"
+  get "sessions/create"
+  get "sessions/destroy", as: "logout"
   root "games#index"
 
+  resources :sessions
   resources :critics
   resources :involved_companies
   resources :games do

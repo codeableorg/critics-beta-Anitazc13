@@ -6,9 +6,11 @@ class User < ApplicationRecord
   validates :email, format: { with: VALID_EMAIL_REGEX }, allow_blank: true
   validates :birth_date, presence: true
   validate :sixteen_or_older, unless: -> { birth_date.nil? }
+  # attr_accessor :email, :password, :password_confirmation
 
   # Association
   has_many :critics, dependent: :destroy
+  has_secure_password
 
   private
 

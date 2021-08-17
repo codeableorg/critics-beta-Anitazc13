@@ -24,7 +24,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user
+      # redirect_to @user
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: "Thank you for sign up"
     else
       render :new
     end
@@ -52,6 +54,7 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:username, :email, :birth_date, :first_name, :last_name)
+    params.require(:user).permit(:username, :email, :birth_date, :first_name, :last_name,
+                                 :password, :password_confirmation)
   end
 end
